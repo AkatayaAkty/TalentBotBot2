@@ -56,3 +56,7 @@ bot.helpers.upsertGlobalApplicationCommands([HelloCommand.info]);
 
 
 await startBot(bot);
+
+Deno.cron("Continuous Request", "*/2 * * * *", () => {
+    console.log("running...");
+});
