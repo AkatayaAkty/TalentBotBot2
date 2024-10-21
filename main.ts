@@ -32,7 +32,7 @@ const HelloCommand: SlashCommand = {
 // ボットの作成
 const bot = createBot({
     token: BotToken,
-    botId: getBotIdFromToken(BotToken),
+    botId: getBotIdFromToken(BotToken) as bigint,
 
     intents: Intents.Guilds | Intents.GuildMessages,
 
