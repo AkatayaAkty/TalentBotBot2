@@ -14,7 +14,7 @@ console.log("BOT_TOKEN raw:", BotTokenRaw);
 
 if (!BotTokenRaw) {
   console.error("ERROR: BOT_TOKENが設定されていません。");
-  Deno.exit(1);
+  export default () => new Response("Missing token", { status: 500 });
 }
 
 const BotToken = BotTokenRaw.trim();
@@ -25,7 +25,7 @@ try {
   console.log("Bot ID:", botId);
 } catch (e) {
   console.error("ERROR: BOT_TOKENの形式が不正です。", e);
-  Deno.exit(1);
+  export default () => new Response("Missing token", { status: 500 });
 }
 
 const HelloCommand: SlashCommand = {
