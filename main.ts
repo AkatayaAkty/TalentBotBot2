@@ -8,7 +8,25 @@ interface SlashCommand {
 };
 
 // Botのトークンを.envから取得
-const BotToken: string = Deno.env.get("BOT_TOKEN")!;
+// const BotToken: string = Deno.env.get("BOT_TOKEN")!;
+const BotTokenRaw = Deno.env.get("BOT_TOKEN");
+console.log("BOT_TOKEN raw:", BotTokenRaw);
+
+if (!BotTokenRaw) {
+  console.error("ERROR: BOT_TOKENが設定されていません。");
+  Deno.exit(1);
+}
+
+const BotToken = BotTokenRaw.trim();
+console.log("BOT_TOKEN after trim:", BotToken);
+
+try {
+  const botId = getBotIdFromToken(BotToken);
+  console.log("Bot ID:", botId);
+} catch (e) {
+  console.error("ERROR: BOT_TOKENの形式が不正です。", e);
+  Deno.exit(1);
+}
 
 const HelloCommand: SlashCommand = {
     // コマンド情報
